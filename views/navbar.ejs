@@ -1,0 +1,34 @@
+<nav class="navbar shadow-lg navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="/dashboard">Students App</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavbar"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <% if (page_name === 'null') { %> active <% } %>">
+        <a class="nav-link" href="/dashboard/notices">Notices</a>
+      </li>
+      <li class="nav-item <% if (page_name === 'null') { %> active <% } %>">
+        <a class="nav-link" href="/dashboard/documents">Documents</a>
+      </li>
+      <li class="nav-item <% if (page_name === 'Upload') { %> active <% } %>">
+        <a class="nav-link" href="/dashboard/upload">Upload</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li
+        class="nav-item-float-right <% if (page_name === 'Account') { %> active <% } %>"
+      >
+        <a href="/dashboard/account" class="nav-link">Account</a>
+      </li>
+      <li class="nav-item-float-right">
+        <a href="/users/logout" class="nav-link">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

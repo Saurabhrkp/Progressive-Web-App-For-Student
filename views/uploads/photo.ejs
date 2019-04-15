@@ -1,0 +1,61 @@
+<% include ../navbar %>
+<!-- Default form subscription -->
+<div style="padding-top: 3%">
+  <div class="card col-md-5 m-auto shadow">
+    <% include ../partials/messages %>
+    <form
+      class="text-center p-5"
+      enctype="multipart/form-data"
+      method="POST"
+      action="/dashboard/upload/document/photo"
+    >
+      <p class="h4 mb-4">Upload Photo</p>
+
+      <p>Please fill some detail about Photo and then Upload</p>
+
+      <p>
+        <a href="" target="_blank">See the usage</a>
+      </p>
+
+      <!-- Title -->
+      <input
+        type="text"
+        name="title"
+        class="form-control mb-4"
+        placeholder="Title"
+      />
+
+      <input
+        type="file"
+        class="custom-file mb-4 "
+        name="photo"
+      />
+
+      <!-- Discription -->
+      <div class="form-group">
+        <textarea
+          class="form-control mb-4"
+          type="text"
+          rows="3"
+          name="discription"
+          placeholder="Discription"
+        ></textarea>
+      </div>
+
+      <!-- Caption -->
+      <input
+        type="text"
+        name="caption"
+        class="form-control mb-4"
+        placeholder="Caption"
+      />
+
+      <!-- Upload button -->
+      <button class="btn btn-info btn-block" type="submit">
+        Upload
+      </button>
+    </form>
+    <!-- Default form subscription -->
+  </div>
+</div>
+<% include ../footer %>

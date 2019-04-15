@@ -1,0 +1,67 @@
+<% include navbar %>
+
+<div class="container" style=" padding-top: 1%">
+  <% include ./partials/messages %>
+  <div>
+    <br />
+    <div class="jumbotron text-center" style="margin-bottom:2%;">
+      <h1>Photos</h1>
+    </div>
+    <div class="row justify-content-center">
+      <% for(var i=0; i < photos.length; i++) { %>
+      <div class="col-sm-5">
+        <div class="card text-center mb-4 shadow">
+          <div class="card-body">
+            <a href="<%= photos[i].path %>" role="button"
+              ><img
+                class="img-fluid img-thumbnail"
+                src="<%= photos[i].path %>"
+                alt="<%= photos[i].caption %>"
+            /></a>
+            <p></p>
+            <h5 class="card-title"><%= photos[i].title %></h5>
+            <p class="card-text"><%= photos[i].discription %></p>
+            <a href="<%= photos[i].docURL %>" class="btn btn-primary"
+              >View Details</a
+            >
+            <p class="card-text">
+              <small class="text-muted"><%= photos[i].createdAt %></small>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <br />
+    <div class="jumbotron text-center" style="margin-bottom:2%;">
+      <h1>PDFs</h1>
+    </div>
+    <div class="row justify-content-center">
+      <% for(var j=0; j < pdfs.length; j++) { %>
+      <div class="col-sm-5">
+        <div class="card text-center mb-4 shadow">
+          <div class="card-body">
+            <!-- <a href="<%= pdfs[j].path %>" role="button"
+              ><img
+                class="img-fluid img-thumbnail"
+                src="<%= pdfs[j].path %>"
+                alt="<%= pdfs[j].caption %>"
+            /></a> -->
+            <p></p>
+            <h5 class="card-title"><%= pdfs[j].title %></h5>
+            <p class="card-text"><%= pdfs[j].discription %></p>
+            <a href="<%= pdfs[j].docURL %>" class="btn btn-primary"
+              >View Details</a
+            >
+            <p class="card-text">
+              <small class="text-muted"><%= pdfs[j].createdAt %></small>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<% include footer %>
