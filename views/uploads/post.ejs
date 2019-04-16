@@ -3,65 +3,62 @@
 <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 
 <div style="padding-top: 3%">
-    <div class="card col-md-10 m-auto shadow">
-      <% include ../partials/messages %>
-      <form
-        class="text-center p-5"
-        method="POST"
-        action=""
-      >
-        <p class="h4 mb-4">Write A Post</p>
-  
-        <p>Please fill some detail about Post. </p>
-  
-        <p>
-          <a href="" target="_blank">See the usage</a>
-        </p>
-  
-        <!-- Title -->
-        <input
-          type="text"
-          name="title"
-          class="form-control mb-4"
-          placeholder="Title"
-        />
-  
-        <!-- Post -->
-        <div class="form-group">
-          <textarea
-            class="form-control mb-4"
-            name="post"
-            placeholder="Content of Post"
-          ></textarea>
-        </div>
-  
-        <!-- Links -->
-        <input
-          type="text"
-          name="link"
-          class="form-control mb-4"
-          placeholder="Link"
-        />
+  <div class="card col-md-10 m-auto shadow">
+    <p></p>
+    <% include ../partials/messages %>
+    <form class="text-center p-5" method="POST" action="">
+      <p class="h4 mb-4">Write A Post</p>
 
-        <!-- Tags -->
-        <input
-          type="text"
-          name="tags"
+      <p>Please fill some detail about Post.</p>
+
+      <p>
+        <a href="" target="_blank">See the usage</a>
+      </p>
+
+      <!-- Title -->
+      <input
+        type="text"
+        name="title"
+        class="form-control mb-4"
+        placeholder="Title"
+      />
+
+      <!-- Post -->
+      <div class="form-group">
+        <textarea
           class="form-control mb-4"
-          placeholder="Tags"
-        />
-  
-        <!-- Sumit button -->
-        <button class="btn btn-info btn-block" type="submit">
-          Sumit
-        </button>
-      </form>
-      <!-- Default form subscription -->
-    </div>
+          name="post"
+          placeholder="Content of Post"
+        ></textarea>
+      </div>
+
+      <!-- Links -->
+      <input
+        type="text"
+        name="link"
+        class="form-control mb-4"
+        placeholder="Link"
+      />
+
+      <!-- Tags -->
+      <input
+        type="text"
+        name="tags"
+        class="form-control mb-4"
+        placeholder="Tags"
+      />
+
+      <!-- Sumit button -->
+      <button class="btn btn-info btn-block" type="submit">
+        Sumit
+      </button>
+    </form>
+    <!-- Default form subscription -->
   </div>
+</div>
 
-  <script>
-    CKEDITOR.replace( 'post' );
+<script>
+  CKEDITOR.replace("post");
 </script>
 
 <% include ../footer %>
