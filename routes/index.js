@@ -4,7 +4,7 @@ const {ensureAuthenticated} = require('../config/auth');
 const dashboards = require('../controllers/dashboardController');
 
 // Welcome Page
-router.get('/', (req, res) => res.render('welcome', { page_name: 'welcome'}));
+router.get('/', (req, res) => res.render('welcome', { current: 'welcome', page: "Sign in Or Sign Up"}));
 
 // Dashboard
 router.get('/dashboard', ensureAuthenticated, dashboards.dashboard);
@@ -31,18 +31,30 @@ router.get('/dashboard/upload/document/pdf', ensureAuthenticated, dashboards.doc
 router.post('/dashboard/upload/document/pdf', ensureAuthenticated, dashboards.document_pdf_post);
 
 // Dashboard/upload/Document/post
-router.get('/dashboard/upload/document/post', ensureAuthenticated, dashboards.document_post);
+router.get('/dashboard/upload/document/post', ensureAuthenticated, dashboards.document_post_get);
+
+// Dashboard/upload/Document/post
+router.post('/dashboard/upload/document/post', ensureAuthenticated, dashboards.document_post_post);
 
 // Dashboard/upload/Notice
 router.get('/dashboard/upload/notice', ensureAuthenticated, dashboards.notice);
 
 // Dashboard/upload/Notice/photo
-router.get('/dashboard/upload/notice/photo', ensureAuthenticated, dashboards.notice_photo);
+router.get('/dashboard/upload/notice/photo', ensureAuthenticated, dashboards.notice_photo_get);
+
+// Dashboard/upload/Notice/photo
+router.post('/dashboard/upload/notice/photo', ensureAuthenticated, dashboards.notice_photo_post);
 
 // Dashboard/upload/Notice/pdf
-router.get('/dashboard/upload/notice/pdf', ensureAuthenticated, dashboards.notice_pdf);
+router.get('/dashboard/upload/notice/pdf', ensureAuthenticated, dashboards.notice_pdf_get);
+
+// Dashboard/upload/Notice/pdf
+router.post('/dashboard/upload/notice/pdf', ensureAuthenticated, dashboards.notice_pdf_post);
 
 // Dashboard/upload/Notice/post
-router.get('/dashboard/upload/notice/post', ensureAuthenticated, dashboards.notice_post);
+router.get('/dashboard/upload/notice/post', ensureAuthenticated, dashboards.notice_post_get);
+
+// Dashboard/upload/Notice/post
+router.post('/dashboard/upload/notice/post', ensureAuthenticated, dashboards.notice_post_post);
 
 module.exports = router;

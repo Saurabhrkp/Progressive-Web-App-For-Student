@@ -8,10 +8,14 @@ const TextSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    discription: {
+    post: {
+      type: String,
+      required: true
+    },
+    links: {
       type: String
     },
-    caption: {
+    tags: {
       type: String
     },
     _user: {
@@ -31,7 +35,12 @@ const TextSchema = new mongoose.Schema(
 );
 
 // Virtual for this text URL.
-TextSchema.virtual("url").get(function() {
+TextSchema.virtual("doctxtURL").get(function() {
+  return "/dashboard/text/" + this._id;
+});
+
+// Virtual for this text URL.
+TextSchema.virtual("notitxtURL").get(function() {
   return "/dashboard/text/" + this._id;
 });
 
