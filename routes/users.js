@@ -9,12 +9,12 @@ let User = require("../models/User");
 
 // Login Page
 router.get("/login", (req, res) =>
-  res.render("login", { current: "welcome", page: "Login" })
+  res.render("login", { current: "welcome" })
 );
 
 // Register Page
 router.get("/register", (req, res) =>
-  res.render("register", { current: "done", page: "Login" })
+  res.render("register", { current: "done" })
 );
 
 // Register

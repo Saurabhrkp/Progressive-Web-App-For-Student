@@ -24,8 +24,7 @@ const PdfSchema = new mongoose.Schema(
       required: true
     },
     _type: {
-      type: Schema.ObjectId,
-      ref: "Type",
+      type: String,
       required: true
     }
   },

@@ -24,6 +24,7 @@
         name="title"
         class="form-control mb-4"
         placeholder="Title"
+        value="<%= typeof title != 'undefined' ? title : '' %>"
       />
 
       <input type="file" class="custom-file mb-4 " name="pdf" />
@@ -36,6 +37,7 @@
           rows="3"
           name="discription"
           placeholder="Discription"
+          value="<%= typeof discription != 'undefined' ? discription : '' %>"
         ></textarea>
       </div>
 
@@ -45,6 +47,7 @@
         name="caption"
         class="form-control mb-4"
         placeholder="Caption"
+        value="<%= typeof caption != 'undefined' ? caption : '' %>"
       />
 
       <!-- Upload button -->

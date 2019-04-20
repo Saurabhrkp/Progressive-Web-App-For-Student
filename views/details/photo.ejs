@@ -1,0 +1,19 @@
+<% include ../navbar %>
+<link rel="stylesheet" href="/stylesheets/style.css">
+<br>
+<div class="center responsive">
+    <a href="../<%= photo.path %>" role="button"
+      ><img
+        class="img-fluid img"
+        class="center"
+        src="../<%= photo.path %>"
+        alt="<%= photo.caption %>"
+    /></a>
+</div>
+<br>
+<div class="text-center">
+    <h5 class="card-title"><%= photo.title %></h5>
+    <p class="card-text"><%= photo.discription %></p>
+</div>
+
+<% include ../footer %>

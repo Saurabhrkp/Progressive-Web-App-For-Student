@@ -22,14 +22,14 @@ exports.dashboard = function(req, res, next) {
           ["path", "caption", "title", "discription", "createdAt"],
           { sort: { _id: -1 } }
         )
-          .populate("user")
+          .populate('_user')
+          .populate('_type')
           .exec(callback);
       },
       pdfs: function(callback) {
         Pdf.find({}, ["path", "caption", "title", "discription", "createdAt"], {
           sort: { _id: -1 }
         })
-          .populate("user")
           .exec(callback);
       }
     },
@@ -43,18 +43,17 @@ exports.dashboard = function(req, res, next) {
       }
       // Successful, so render.
       res.render("dashboard", {
-        page: "Home Page",
         current: "Dashboard",
         photos: results.photos,
         pdfs: results.pdfs,
-        user: req.user.username
+        user: req.user
       });
     }
   );
 };
 
 exports.upload = function(req, res) {
-  res.render("upload", { current: "Upload", user: req.user, page: "Upload" });
+  res.render("upload", { current: "Upload", user: req.user });
 };
 
 //Account
@@ -62,8 +61,7 @@ exports.upload = function(req, res) {
 exports.account = function(req, res) {
   res.render("account", {
     current: "Account",
-    username: req.user.username,
-    page: "Update Account"
+    username: req.user.username
   });
 };
 
@@ -71,17 +69,15 @@ exports.account = function(req, res) {
 //All controls
 exports.document = function(req, res) {
   res.render("./uploads/document", {
-    current: "Document",
-    user: req.user,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user
   });
 };
 
 exports.document_photo_get = function(req, res) {
   res.render("./uploads/photo", {
-    current: "Document",
-    user: req.user._id,
-    page: "Upload Documnet"
+    current: "Upload",
+    user: req.user._id
   });
 };
 
@@ -95,7 +91,9 @@ exports.document_photo_post = function(req, res) {
     if (errors.length > 0) {
       res.render("./uploads/photo", {
         errors,
-        page: "Please Insert File",
+        title,
+        discription,
+        caption,
         current: "Upload"
       });
     } else {
@@ -109,29 +107,26 @@ exports.document_photo_post = function(req, res) {
         _user: req.user._id,
         _type: typeID
       });
-      console.log(photo);
       photo.save(function(err, photo) {
         if (err) return res.send(err);
         User.findById(req.user._id, function(err, user) {
           if (err) return res.send(err);
           user.photos.push(photo._id);
           user.save();
-          console.log(user);
+          console.log({photo,user});
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
       });
-      console.log(photo);
     }
   });
 };
 
 exports.document_pdf_get = function(req, res) {
   res.render("./uploads/pdf", {
-    current: "Document",
-    user: req.user,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user
   });
 };
 
@@ -145,7 +140,9 @@ exports.document_pdf_post = function(req, res) {
     if (errors.length > 0) {
       res.render("./uploads/pdf", {
         errors,
-        page: "Please Insert File",
+        title,
+        discription,
+        caption,
         current: "Upload"
       });
     } else {
@@ -159,29 +156,27 @@ exports.document_pdf_post = function(req, res) {
         _user: req.user._id,
         _type: typeID
       });
-      console.log(pdf);
       pdf.save(function(err, pdf) {
         if (err) return res.send(err);
         User.findById(req.user._id, function(err, user) {
           if (err) return res.send(err);
           user.pdfs.push(pdf._id);
           user.save();
-          console.log(user);
+          console.table(user);
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
       });
-      console.log(pdf);
+      console.table(pdf);
     }
   });
 };
 
 exports.document_post_get = function(req, res) {
   res.render("./uploads/post", {
-    current: "Document",
-    user: req.user,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user
   });
 };
 
@@ -198,7 +193,8 @@ exports.document_post_post = function(req, res) {
       title,
       post,
       links,
-      tags
+      tags,
+      current: "Upload"
     });
   } else {
     const text = new Text({
@@ -231,17 +227,15 @@ exports.document_post_post = function(req, res) {
 
 exports.notice = function(req, res) {
   res.render("./uploads/notice", {
-    current: "Document",
-    user: req.user,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user
   });
 };
 
 exports.notice_photo_get = function(req, res) {
   res.render("./uploads/photo", {
-    current: "Document",
-    user: req.user._id,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user._id
   });
 };
 
@@ -259,7 +253,8 @@ exports.notice_photo_post = function(req, res) {
         errors,
         title,
         discription,
-        caption
+        caption,
+        current: "Upload"
       });
     } else {
       const photo = new Photo({
@@ -290,9 +285,8 @@ exports.notice_photo_post = function(req, res) {
 
 exports.notice_pdf_get = function(req, res) {
   res.render("./uploads/pdf", {
-    current: "Document",
-    user: req.user,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user
   });
 };
 
@@ -310,7 +304,8 @@ exports.notice_pdf_post = function(req, res) {
         errors,
         title,
         discription,
-        caption
+        caption,
+        current: "Upload"
       });
     } else {
       const pdf = new Pdf({
@@ -341,9 +336,8 @@ exports.notice_pdf_post = function(req, res) {
 
 exports.notice_post_get = function(req, res) {
   res.render("./uploads/post", {
-    current: "Document",
-    user: req.user,
-    page: "Upload Document"
+    current: "Upload",
+    user: req.user
   });
 };
 
@@ -360,7 +354,8 @@ exports.notice_post_post = function(req, res) {
       title,
       post,
       links,
-      tags
+      tags,
+      current: "Upload"
     });
   } else {
     const text = new Text({

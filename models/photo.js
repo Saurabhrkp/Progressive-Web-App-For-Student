@@ -36,7 +36,7 @@ const PhotoSchema = new mongoose.Schema(
 
 // Virtual for this document photo instance URL.
 PhotoSchema.virtual("docphotoURL").get(function() {
-  return "/document/photo/" + this._id;
+  return "/photo/" + this._id;
 });
 
 // Virtual for this notice photo instance URL.

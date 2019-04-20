@@ -21,6 +21,7 @@
         name="title"
         class="form-control mb-4"
         placeholder="Title"
+        value="<%= typeof title != 'undefined' ? title : '' %>"
       />
 
       <!-- Post -->
@@ -29,15 +30,17 @@
           class="form-control mb-4"
           name="post"
           placeholder="Content of Post"
+          value="<%= typeof post != 'undefined' ? post : '' %>"
         ></textarea>
       </div>
 
       <!-- Links -->
       <input
         type="text"
-        name="link"
+        name="links"
         class="form-control mb-4"
         placeholder="Link"
+        value="<%= typeof links != 'undefined' ? links : '' %>"
       />
 
       <!-- Tags -->
@@ -46,6 +49,7 @@
         name="tags"
         class="form-control mb-4"
         placeholder="Tags"
+        value="<%= typeof tags != 'undefined' ? tags : '' %>"
       />
 
       <!-- Sumit button -->

@@ -1,10 +1,11 @@
 <% include navbar %>
-
-<div class="container" style=" padding-top: 1%">
+<title>Home Page</title>
+<div class="container">
+  <p></p>
   <% include ./partials/messages %>
   <div>
     <br />
-    <div class="jumbotron text-center" style="margin-bottom:2%;">
+    <div class="jumbotron text-center shadow" style="margin-bottom:2%;">
       <h1>Photos</h1>
     </div>
     <div class="row justify-content-center">
@@ -20,20 +21,24 @@
             /></a>
             <p></p>
             <h5 class="card-title"><%= photos[i].title %></h5>
-            <p class="card-text"><%= photos[i].discription %></p>
-            <a href="<%= photos[i].docURL %>" class="btn btn-primary"
+            <p class="card-text"><%= photos[i].caption %></p>
+            <a href="<%= photos[i].docphotoURL %>" class="btn btn-primary shadow"
               >View Details</a
             >
-            <p class="card-text">
-              <small class="text-muted"><%= photos[i].createdAt %></small>
-            </p>
+          </div>
+          <p class="card-text">
+            <small class="text-muted">By <%= photos[i]._user.name %></small>
+            <small class="text-muted">In <%= photos[i]._type.name %></small>
+          </p>
+          <div class="card-footer">
+            <small class="text-muted"><%= photos[i].createdAt %></small>
           </div>
         </div>
       </div>
       <% } %>
     </div>
     <br />
-    <div class="jumbotron text-center" style="margin-bottom:2%;">
+    <div class="jumbotron text-center shadow" style="margin-bottom:2%;">
       <h1>PDFs</h1>
     </div>
     <div class="row justify-content-center">
@@ -49,8 +54,8 @@
             /></a> -->
             <p></p>
             <h5 class="card-title"><%= pdfs[j].title %></h5>
-            <p class="card-text"><%= pdfs[j].discription %></p>
-            <a href="<%= pdfs[j].docURL %>" class="btn btn-primary"
+            <p class="card-text"><%= pdfs[j].discription  %></p>
+            <a href="<%= pdfs[j].docURL %>" class="btn btn-primary shadow"
               >View Details</a
             >
             <p class="card-text">
