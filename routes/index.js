@@ -55,6 +55,11 @@ router.post('/dashboard/upload/notice/post', ensureAuthenticated, dashboards.not
 //Detail Controls
 router.get('/photo/:id', details.photo_detail);
 
+router.get('/pdf/:id', details.photo_detail);
+
+router.get('/post/:id', details.photo_detail);
+
 // /photos/1555753079472-photo.jpg
-router.get('/photos/.*.jpg$/')
+router.get('/:id/download', details.photo_download);
+
 module.exports = router;

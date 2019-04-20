@@ -1,19 +1,37 @@
 <% include ../navbar %>
-<link rel="stylesheet" href="/stylesheets/style.css">
-<br>
-<div class="center responsive">
-    <a href="../<%= photo.path %>" role="button"
-      ><img
-        class="img-fluid img"
-        class="center"
-        src="../<%= photo.path %>"
-        alt="<%= photo.caption %>"
-    /></a>
+<title>Photo</title>
+
+<!-- <div class="m-4 shadow center" style="width: auto;"> -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <br />
+      <div class="card shadow " style="width: auto;">
+        <a href="../<%= photo.path %>" role="button"
+          ><img
+            class="img-fluid img card-img-top"
+            src="../<%= photo.path %>"
+            alt="<%= photo.caption %>"
+        /></a>
+        <div class="card-body">
+          <h5 class="card-title"><%= photo.title %></h5>
+          <p class="card-text"><%= photo.discription %></p>
+          <a href="../<%= photo._id %>/download" class="btn btn-primary">Download</a>
+          <p class="card-text">
+            <small class="text-muted">By <%= photo._user.name %></small>
+            <small class="text-muted">In <%= photo._type.name %></small>
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted"
+            ><%= moment(photo.createdAt).fromNow() %></small
+          >
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
 </div>
-<br>
-<div class="text-center">
-    <h5 class="card-title"><%= photo.title %></h5>
-    <p class="card-text"><%= photo.discription %></p>
-</div>
+<!-- </div> -->
 
 <% include ../footer %>
