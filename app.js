@@ -7,6 +7,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
+var moment = require('moment');
 
 // Passport Config
 require('./config/passport')(passport);
@@ -70,6 +71,9 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// Moment Locals
+app.locals.moment = require('moment');
 
 // error handler
 app.use(function(err, req, res, next) {

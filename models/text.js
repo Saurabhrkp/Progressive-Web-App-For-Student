@@ -35,12 +35,7 @@ const TextSchema = new mongoose.Schema(
 );
 
 // Virtual for this text URL.
-TextSchema.virtual("doctxtURL").get(function() {
-  return "/dashboard/text/" + this._id;
-});
-
-// Virtual for this text URL.
-TextSchema.virtual("notitxtURL").get(function() {
+TextSchema.virtual("url").get(function() {
   return "/dashboard/text/" + this._id;
 });
 

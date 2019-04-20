@@ -1,11 +1,10 @@
 <% include navbar %>
 <title>Home Page</title>
 <div class="container">
-  <p></p>
   <% include ./partials/messages %>
   <div>
     <br />
-    <div class="jumbotron text-center shadow" style="margin-bottom:2%;">
+    <div class="jumbotron text-center shadow mb-4">
       <h1>Photos</h1>
     </div>
     <div class="row justify-content-center">
@@ -15,14 +14,16 @@
           <div class="card-body">
             <a href="<%= photos[i].path %>" role="button"
               ><img
-                class="img-fluid img-thumbnail"
+                class="img-fluid"
                 src="<%= photos[i].path %>"
                 alt="<%= photos[i].caption %>"
             /></a>
             <p></p>
             <h5 class="card-title"><%= photos[i].title %></h5>
             <p class="card-text"><%= photos[i].caption %></p>
-            <a href="<%= photos[i].docphotoURL %>" class="btn btn-primary shadow"
+            <a
+              href="<%= photos[i].url %>"
+              class="btn btn-primary shadow"
               >View Details</a
             >
           </div>
@@ -31,36 +32,65 @@
             <small class="text-muted">In <%= photos[i]._type.name %></small>
           </p>
           <div class="card-footer">
-            <small class="text-muted"><%= photos[i].createdAt %></small>
+            <small class="text-muted"
+              ><%= moment(photos[i].createdAt).calendar() %></small
+            >
           </div>
         </div>
       </div>
       <% } %>
     </div>
-    <br />
-    <div class="jumbotron text-center shadow" style="margin-bottom:2%;">
+    <div class="jumbotron text-center shadow mb-4 mt-4">
       <h1>PDFs</h1>
     </div>
     <div class="row justify-content-center">
-      <% for(var j=0; j < pdfs.length; j++) { %>
-      <div class="col-sm-5">
+      <% for(var i=0; i < pdfs.length; i++) { %>
+      <div class="col-sm-3">
         <div class="card text-center mb-4 shadow">
           <div class="card-body">
-            <!-- <a href="<%= pdfs[j].path %>" role="button"
-              ><img
-                class="img-fluid img-thumbnail"
-                src="<%= pdfs[j].path %>"
-                alt="<%= pdfs[j].caption %>"
-            /></a> -->
             <p></p>
-            <h5 class="card-title"><%= pdfs[j].title %></h5>
-            <p class="card-text"><%= pdfs[j].discription  %></p>
-            <a href="<%= pdfs[j].docURL %>" class="btn btn-primary shadow"
+            <h5 class="card-title"><%= pdfs[i].title %></h5>
+            <p class="card-text"><%= pdfs[i].discription %></p>
+            <a href="<%= pdfs[i].docURL %>" class="btn btn-primary shadow"
               >View Details</a
             >
-            <p class="card-text">
-              <small class="text-muted"><%= pdfs[j].createdAt %></small>
-            </p>
+          </div>
+          <p class="card-text">
+            <small class="text-muted">By <%= pdfs[i]._user.name %></small>
+            <small class="text-muted">In <%= pdfs[i]._type.name %></small>
+          </p>
+          <div class="card-footer">
+            <small class="text-muted"
+              ><%= moment(pdfs[i].createdAt).calendar() %></small
+            >
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <div class="jumbotron text-center shadow mb-4 mt-4">
+      <h1>Post</h1>
+    </div>
+    <div class="row justify-content-center">
+      <% for(var i=0; i < posts.length; i++) { %>
+      <div class="col-sm-3">
+        <div class="card text-center mb-4 shadow">
+          <div class="card-body">
+            <p></p>
+            <h5 class="card-title"><%= posts[i].title %></h5>
+            <p class="card-text"><%= posts[i].discription %></p>
+            <a href="<%= posts[i].docURL %>" class="btn btn-primary shadow"
+              >View Details</a
+            >
+          </div>
+          <p class="card-text">
+            <small class="text-muted">By <%= posts[i]._user.name %></small>
+            <small class="text-muted">In <%= posts[i]._type.name %></small>
+          </p>
+          <div class="card-footer">
+            <small class="text-muted"
+              ><%= moment(posts[i].createdAt).calendar() %></small
+            >
           </div>
         </div>
       </div>

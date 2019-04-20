@@ -24,7 +24,8 @@ const PdfSchema = new mongoose.Schema(
       required: true
     },
     _type: {
-      type: String,
+      type: Schema.ObjectId,
+      ref: "Type",
       required: true
     }
   },
@@ -34,12 +35,7 @@ const PdfSchema = new mongoose.Schema(
 );
 
 // Virtual for this PDF instance URL.
-PdfSchema.virtual("docpdfURL").get(function() {
-  return "/dashboard/pdf/" + this._id;
-});
-
-// Virtual for this PDF instance URL.
-PdfSchema.virtual("notipdfURL").get(function() {
+PdfSchema.virtual("url").get(function() {
   return "/dashboard/pdf/" + this._id;
 });
 

@@ -22,14 +22,24 @@ exports.dashboard = function(req, res, next) {
           ["path", "caption", "title", "discription", "createdAt"],
           { sort: { _id: -1 } }
         )
-          .populate('_user')
-          .populate('_type')
+          .populate("_user")
+          .populate("_type")
           .exec(callback);
       },
       pdfs: function(callback) {
         Pdf.find({}, ["path", "caption", "title", "discription", "createdAt"], {
           sort: { _id: -1 }
         })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      },
+      posts: function(callback) {
+        Text.find({}, ["title", "post", "links", "tags"], {
+          sort: { _id: -1 }
+        })
+          .populate("_user")
+          .populate("_type")
           .exec(callback);
       }
     },
@@ -46,6 +56,7 @@ exports.dashboard = function(req, res, next) {
         current: "Dashboard",
         photos: results.photos,
         pdfs: results.pdfs,
+        posts: results.posts,
         user: req.user
       });
     }
@@ -113,7 +124,7 @@ exports.document_photo_post = function(req, res) {
           if (err) return res.send(err);
           user.photos.push(photo._id);
           user.save();
-          console.log({photo,user});
+          console.log({ photo, user });
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
@@ -162,13 +173,12 @@ exports.document_pdf_post = function(req, res) {
           if (err) return res.send(err);
           user.pdfs.push(pdf._id);
           user.save();
-          console.table(user);
+          console.log({ photo, user });
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
       });
-      console.table(pdf);
     }
   });
 };
@@ -212,13 +222,12 @@ exports.document_post_post = function(req, res) {
         if (err) return res.send(err);
         user.texts.push(text._id);
         user.save();
-        console.log(user);
+        console.log({ text, user });
       });
       console.log("saved");
       req.flash("success_msg", "You are have Uploaded");
       res.redirect("/dashboard");
     });
-    console.log(text);
   }
 };
 
@@ -272,13 +281,12 @@ exports.notice_photo_post = function(req, res) {
           if (err) return res.send(err);
           user.photos.push(photo._id);
           user.save();
-          console.log(user);
+          console.log({ photo, user });
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
       });
-      console.log(photo);
     }
   });
 };
@@ -323,13 +331,12 @@ exports.notice_pdf_post = function(req, res) {
           if (err) return res.send(err);
           user.pdfs.push(pdf._id);
           user.save();
-          console.log(user);
+          console.log({ pdf, user });
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
       });
-      console.log(pdf);
     }
   });
 };
@@ -366,19 +373,17 @@ exports.notice_post_post = function(req, res) {
       _user: req.user._id,
       _type: typeID
     });
-    console.log(text);
     text.save(function(err, text) {
       if (err) return res.send(err);
       User.findById(req.user._id, function(err, user) {
         if (err) return res.send(err);
         user.texts.push(text._id);
         user.save();
-        console.log(user);
+        console.log({ text, user });
       });
       console.log("saved");
       req.flash("success_msg", "You are have Uploaded");
       res.redirect("/dashboard");
     });
-    console.log(text);
   }
 };
