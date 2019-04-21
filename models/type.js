@@ -10,7 +10,7 @@ var TypeSchema = new Schema({
 TypeSchema
 .virtual('url')
 .get(function () {
-  return '/dashboard/type/'+this._id;
+  return '/type/'+this._id;
 });
 
 // Export model.

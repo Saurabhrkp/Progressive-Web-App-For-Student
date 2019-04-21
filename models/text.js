@@ -36,7 +36,7 @@ const TextSchema = new mongoose.Schema(
 
 // Virtual for this text URL.
 TextSchema.virtual("url").get(function() {
-  return "/dashboard/text/" + this._id;
+  return "/text/" + this._id;
 });
 
 module.exports = mongoose.model("Text", TextSchema);

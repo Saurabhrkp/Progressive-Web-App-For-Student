@@ -60,6 +60,6 @@ router.get('/pdf/:id', details.photo_detail);
 router.get('/post/:id', details.photo_detail);
 
 // /photos/1555753079472-photo.jpg
-router.get('/:id/download', details.photo_download);
+router.get('/download/:id', details.photo_download);
 
 module.exports = router;

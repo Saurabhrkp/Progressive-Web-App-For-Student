@@ -36,7 +36,7 @@ const PdfSchema = new mongoose.Schema(
 
 // Virtual for this PDF instance URL.
 PdfSchema.virtual("url").get(function() {
-  return "/dashboard/pdf/" + this._id;
+  return "/pdf/" + this._id;
 });
 
 module.exports = mongoose.model("Pdf", PdfSchema);
