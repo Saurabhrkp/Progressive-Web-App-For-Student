@@ -126,6 +126,12 @@ exports.document_photo_post = function(req, res) {
           user.save();
           console.log({ photo, user });
         });
+        Type.findById("5cb2db77ef58e46ad681be94", function(err, type) {
+          if (err) return res.send(err);
+          type.photos.push(photo._id);
+          type.save();
+          console.log({ type });
+        });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
@@ -173,7 +179,13 @@ exports.document_pdf_post = function(req, res) {
           if (err) return res.send(err);
           user.pdfs.push(pdf._id);
           user.save();
-          console.log({ photo, user });
+          console.log({ pdf , user });
+        });
+        Type.findById("5cb2db77ef58e46ad681be94", function(err, type) {
+          if (err) return res.send(err);
+          type.pdfs.push(pdf._id);
+          type.save();
+          console.log({ type });
         });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
@@ -223,6 +235,12 @@ exports.document_post_post = function(req, res) {
         user.texts.push(text._id);
         user.save();
         console.log({ text, user });
+      });
+      Type.findById("5cb2db77ef58e46ad681be94", function(err, type) {
+        if (err) return res.send(err);
+        type.texts.push(text._id);
+        type.save();
+        console.log({ type });
       });
       console.log("saved");
       req.flash("success_msg", "You are have Uploaded");
@@ -283,6 +301,12 @@ exports.notice_photo_post = function(req, res) {
           user.save();
           console.log({ photo, user });
         });
+        Type.findById("5cb2db55ef58e46ad681be7e", function(err, type) {
+          if (err) return res.send(err);
+          type.photos.push(photo._id);
+          type.save();
+          console.log({ type });
+        });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
@@ -333,6 +357,12 @@ exports.notice_pdf_post = function(req, res) {
           user.save();
           console.log({ pdf, user });
         });
+        Type.findById("5cb2db55ef58e46ad681be7e", function(err, type) {
+          if (err) return res.send(err);
+          type.pdfs.push(pdf._id);
+          type.save();
+          console.log({ type });
+        });
         console.log("saved");
         req.flash("success_msg", "You are have Uploaded");
         res.redirect("/dashboard");
@@ -380,6 +410,12 @@ exports.notice_post_post = function(req, res) {
         user.texts.push(text._id);
         user.save();
         console.log({ text, user });
+      });
+      Type.findById("5cb2db55ef58e46ad681be7e", function(err, type) {
+        if (err) return res.send(err);
+        type.texts.push(text._id);
+        type.save();
+        console.log({ type });
       });
       console.log("saved");
       req.flash("success_msg", "You are have Uploaded");

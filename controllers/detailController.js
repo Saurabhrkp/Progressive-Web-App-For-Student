@@ -123,3 +123,93 @@ exports.post_detail = function(req, res, next) {
     }
   );
 };
+
+// Display detail page for a specific Pdf.
+exports.document = function(req, res, next) {
+  async.parallel(
+    {
+      photoDoc: function(callback) {
+        Photo.find({ _type: "5cb2db77ef58e46ad681be94" })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      },
+      pdfDoc: function(callback) {
+        Pdf.find({ _type: "5cb2db77ef58e46ad681be94" })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      },
+      postDoc: function(callback) {
+        Text.find({ _type: "5cb2db77ef58e46ad681be94" })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results == null) {
+        // No results.
+        var err = new Error("Not found");
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so render.
+      res.render("./details/document", {
+        current: "document",
+        photos: results.photoDoc,
+        pdfs: results.pdfDoc,
+        posts: results.postDoc,
+        user: req.user
+      });
+    }
+  );
+};
+
+// Display detail page for a specific Pdf.
+exports.notice = function(req, res, next) {
+  async.parallel(
+    {
+      photoNoti: function(callback) {
+        Photo.find({ _type: "5cb2db55ef58e46ad681be7e" })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      },
+      pdfNoti: function(callback) {
+        Pdf.find({ _type: "5cb2db55ef58e46ad681be7e" })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      },
+      postNoti: function(callback) {
+        Text.find({ _type: "5cb2db55ef58e46ad681be7e" })
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results == null) {
+        // No results.
+        var err = new Error("Not found");
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so render.
+      res.render("./details/notice", {
+        current: "notice",
+        photos: results.photoNoti,
+        pdfs: results.pdfNoti,
+        posts: results.postNoti,
+        user: req.user
+      });
+    }
+  );
+};

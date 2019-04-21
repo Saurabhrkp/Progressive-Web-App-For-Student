@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 // Set up mongoose connection
 let mongoose = require('mongoose');
-let dev_db_url = 'mongodb+srv://gymdb:password21@gymdb-paqxb.mongodb.net/student?retryWrites=true';
+let dev_db_url = 'mongodb://localhost:27017/student';
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;

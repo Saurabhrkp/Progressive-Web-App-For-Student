@@ -59,7 +59,12 @@ router.get('/pdf/:id', details.pdf_detail);
 
 router.get('/text/:id', details.post_detail);
 
-// /photos/1555753079472-photo.jpg
+//Download Photo Link
 router.get('/download/:id', details.photo_download);
+
+//Detail Controls
+router.get('/document', details.document);
+
+router.get('/notice', details.notice);
 
 module.exports = router;
