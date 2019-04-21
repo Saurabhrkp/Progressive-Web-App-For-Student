@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 // Load User model
-let User = require("../models/User");
+let User = require("../models/user");
 
 // Login Page
 router.get("/login", (req, res) =>

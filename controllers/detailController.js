@@ -4,7 +4,7 @@ var Text = require("../models/text");
 var Type = require("../models/type");
 
 // Load User model
-let User = require("../models/User");
+let User = require("../models/user");
 
 var async = require("async");
 
