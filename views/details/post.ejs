@@ -1,0 +1,30 @@
+<% include ../navbar %>
+<title>Post</title>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 ">
+      <br />
+      <div class="card shadow" >
+        <div class="card-header">
+          <%- post.title %>
+        </div>
+        <div class="card-body">
+          <%- post.post %>
+          <a href="https://<%= post.links %>"><%= post.tags %></a>
+          <p class="card-text">
+                <small class="text-muted">By <%= post._user.name %></small>
+                <small class="text-muted">In <%= post._type.name %></small>
+              </p>
+        </div>
+        <div class="card-footer">
+                <small class="text-muted"
+                  ><%= moment(post.createdAt).calendar() %></small
+                >
+              </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../footer %>

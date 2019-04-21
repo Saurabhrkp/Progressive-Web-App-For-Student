@@ -55,9 +55,9 @@ router.post('/dashboard/upload/notice/post', ensureAuthenticated, dashboards.not
 //Detail Controls
 router.get('/photo/:id', details.photo_detail);
 
-router.get('/pdf/:id', details.photo_detail);
+router.get('/pdf/:id', details.pdf_detail);
 
-router.get('/post/:id', details.photo_detail);
+router.get('/text/:id', details.post_detail);
 
 // /photos/1555753079472-photo.jpg
 router.get('/download/:id', details.photo_download);

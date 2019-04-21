@@ -61,3 +61,65 @@ exports.photo_download = function(req, res, next) {
     }
   );
 };
+
+// Display detail page for a specific Pdf.
+exports.pdf_detail = function(req, res, next) {
+  async.parallel(
+    {
+      pdf: function(callback) {
+        Pdf.findById(req.params.id)
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.pdf == null) {
+        // No results.
+        var err = new Error("Pdf not found");
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so render.
+      res.render("./details/pdf", {
+        current: "Pdf",
+        pdf: results.pdf,
+        user: req.user
+      });
+    }
+  );
+};
+
+// Display detail page for a specific Pdf.
+exports.post_detail = function(req, res, next) {
+  async.parallel(
+    {
+      post: function(callback) {
+        Text.findById(req.params.id)
+          .populate("_user")
+          .populate("_type")
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.post == null) {
+        // No results.
+        var err = new Error("Pdf not found");
+        err.status = 404;
+        return next(err);
+      }
+      // Successful, so render.
+      res.render("./details/post", {
+        current: "Post",
+        post: results.post,
+        user: req.user
+      });
+    }
+  );
+};
