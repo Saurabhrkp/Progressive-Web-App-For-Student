@@ -29,23 +29,23 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 let mongoose = require('mongoose');
 let dev_db_url = 'mongodb://localhost:27017/student';
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(mongoDB, {useNewUrlParser: true});
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Express session
 app.use(
-    session({
-      secret: 'secret',
-      resave: true,
-      saveUninitialized: true,
-    })
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
 );
 
 // Passport middleware

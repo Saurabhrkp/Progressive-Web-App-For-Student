@@ -1,35 +1,41 @@
 const multer = require('multer');
-const path   = require('path');
+const path = require('path');
 
 /** Storage Engine */
 const storageEngine = multer.diskStorage({
   destination: './uploads/photos',
-  filename: function(req, file, fn){
-    fn(null,  new Date().getTime().toString()+'-'+file.fieldname+path.extname(file.originalname));
+  filename: function(req, file, fn) {
+    fn(
+      null,
+      new Date().getTime().toString() +
+        '-' +
+        file.fieldname +
+        path.extname(file.originalname)
+    );
   }
-}); 
+});
 
 //init
 
-const uploadPhoto =  multer({
+const uploadPhoto = multer({
   storage: storageEngine,
-  limits: { fileSize:20000000 },
-  fileFilter: function(req, file, callback){
+  limits: { fileSize: 20000000 },
+  fileFilter: function(req, file, callback) {
     validateFile(file, callback);
   }
 }).single('photo');
 
-
-var validateFile = function(file, cb ){
+var validateFile = function(file, cb) {
   allowedFileTypes = /jpeg|jpg|png|gif/;
-  const extension = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimeType  = allowedFileTypes.test(file.mimetype);
-  if(extension && mimeType){
+  const extension = allowedFileTypes.test(
+    path.extname(file.originalname).toLowerCase()
+  );
+  const mimeType = allowedFileTypes.test(file.mimetype);
+  if (extension && mimeType) {
     return cb(null, true);
-  }else{
-    cb("Invalid file type. Only JPEG, PNG and GIF file are allowed.")
+  } else {
+    cb('Invalid file type. Only JPEG, PNG and GIF file are allowed.');
   }
-}
-
+};
 
 module.exports = uploadPhoto;

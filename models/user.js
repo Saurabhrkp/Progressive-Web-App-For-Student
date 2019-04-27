@@ -1,5 +1,4 @@
-/* eslint-disable linebreak-style */
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
@@ -23,19 +22,19 @@ const UserSchema = new mongoose.Schema({
   pdfs: [
     {
       type: Schema.ObjectId,
-      ref: "Pdf"
+      ref: 'Pdf'
     }
   ],
   photos: [
     {
       type: Schema.ObjectId,
-      ref: "Photo"
+      ref: 'Photo'
     }
   ],
   texts: [
     {
       type: Schema.ObjectId,
-      ref: "Text"
+      ref: 'Text'
     }
   ],
   date: {
@@ -45,10 +44,10 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Virtual for this text URL.
-UserSchema.virtual("userURL").get(function() {
-  return "/users/" + this._id;
+UserSchema.virtual('userURL').get(function() {
+  return '/users/' + this._id;
 });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

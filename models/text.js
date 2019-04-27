@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
@@ -20,12 +20,12 @@ const TextSchema = new mongoose.Schema(
     },
     _user: {
       type: Schema.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true
     },
     _type: {
       type: Schema.ObjectId,
-      ref: "Type",
+      ref: 'Type',
       required: true
     }
   },
@@ -35,8 +35,8 @@ const TextSchema = new mongoose.Schema(
 );
 
 // Virtual for this text URL.
-TextSchema.virtual("url").get(function() {
-  return "/text/" + this._id;
+TextSchema.virtual('url').get(function() {
+  return '/text/' + this._id;
 });
 
-module.exports = mongoose.model("Text", TextSchema);
+module.exports = mongoose.model('Text', TextSchema);

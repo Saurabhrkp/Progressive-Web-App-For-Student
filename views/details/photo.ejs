@@ -16,7 +16,9 @@
         <div class="card-body">
           <h5 class="card-title"><%= photo.title %></h5>
           <p class="card-text"><%= photo.discription %></p>
-          <a href="../download/<%= photo._id %>" class="btn btn-primary">Download</a>
+          <a href="../download/<%= photo._id %>" class="btn btn-primary"
+            >Download</a
+          >
           <p class="card-text">
             <small class="text-muted">By <%= photo._user.name %></small>
             <small class="text-muted">In <%= photo._type.name %></small>

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
@@ -20,12 +20,12 @@ const PdfSchema = new mongoose.Schema(
     },
     _user: {
       type: Schema.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true
     },
     _type: {
       type: Schema.ObjectId,
-      ref: "Type",
+      ref: 'Type',
       required: true
     }
   },
@@ -35,8 +35,8 @@ const PdfSchema = new mongoose.Schema(
 );
 
 // Virtual for this PDF instance URL.
-PdfSchema.virtual("url").get(function() {
-  return "/pdf/" + this._id;
+PdfSchema.virtual('url').get(function() {
+  return '/pdf/' + this._id;
 });
 
-module.exports = mongoose.model("Pdf", PdfSchema);
+module.exports = mongoose.model('Pdf', PdfSchema);

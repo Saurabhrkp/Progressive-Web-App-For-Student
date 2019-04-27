@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
@@ -7,27 +7,27 @@ var TypeSchema = new Schema({
   pdfs: [
     {
       type: Schema.ObjectId,
-      ref: "Pdf"
+      ref: 'Pdf'
     }
   ],
   photos: [
     {
       type: Schema.ObjectId,
-      ref: "Photo"
+      ref: 'Photo'
     }
   ],
   texts: [
     {
       type: Schema.ObjectId,
-      ref: "Text"
+      ref: 'Text'
     }
   ]
 });
 
 // Virtual for this type instance URL.
-TypeSchema.virtual("url").get(function() {
-  return "/type/" + this._id;
+TypeSchema.virtual('url').get(function() {
+  return '/type/' + this._id;
 });
 
 // Export model.
-module.exports = mongoose.model("Type", TypeSchema);
+module.exports = mongoose.model('Type', TypeSchema);

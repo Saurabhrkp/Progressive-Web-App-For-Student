@@ -2,9 +2,7 @@
 <div class="row mt-5">
   <div class="col-md-5 m-auto">
     <div class="card card-body shadow">
-      <h1 class="text-center mb-3">
-        <i class="fa fa-user-plus"></i> Register
-      </h1>
+      <h1 class="text-center mb-3"><i class="fa fa-user-plus"></i> Register</h1>
       <% include ./partials/messages %>
       <form action="/users/register" method="POST">
         <div class="form-group">
@@ -19,16 +17,16 @@
           />
         </div>
         <div class="form-group">
-            <label for="username">Username</label>
-            <input
-              type="username"
-              id="username"
-              name="username"
-              class="form-control"
-              placeholder="Enter username"
-              value="<%= typeof username != 'undefined' ? username : '' %>"
-            />
-          </div>
+          <label for="username">Username</label>
+          <input
+            type="username"
+            id="username"
+            name="username"
+            class="form-control"
+            placeholder="Enter username"
+            value="<%= typeof username != 'undefined' ? username : '' %>"
+          />
+        </div>
         <div class="form-group">
           <label for="email">Email</label>
           <input

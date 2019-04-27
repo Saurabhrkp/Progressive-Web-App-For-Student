@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
@@ -20,12 +20,12 @@ const PhotoSchema = new mongoose.Schema(
     },
     _user: {
       type: Schema.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true
     },
     _type: {
       type: Schema.ObjectId,
-      ref: "Type",
+      ref: 'Type',
       required: true
     }
   },
@@ -35,8 +35,8 @@ const PhotoSchema = new mongoose.Schema(
 );
 
 // Virtual for this document photo instance URL.
-PhotoSchema.virtual("url").get(function() {
-  return "/photo/" + this._id;
+PhotoSchema.virtual('url').get(function() {
+  return '/photo/' + this._id;
 });
 
-module.exports = mongoose.model("Photo", PhotoSchema);
+module.exports = mongoose.model('Photo', PhotoSchema);
