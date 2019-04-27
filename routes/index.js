@@ -8,10 +8,10 @@ const details = require('../controllers/detailController');
 router.get('/', (req, res) => res.render('welcome', { current: 'welcome'}));
 
 // Dashboard Control
-router.get('/dashboard', dashboards.dashboard);
+router.get('/dashboard', ensureAuthenticated,dashboards.dashboard);
 
 // Dashboard/Upload
-router.get('/dashboard/upload', ensureAuthenticated, dashboards.upload);
+router.get('/dashboard/upload', dashboards.upload);
 
 // Dashboard/Account
 router.get('/dashboard/account', ensureAuthenticated, dashboards.account);

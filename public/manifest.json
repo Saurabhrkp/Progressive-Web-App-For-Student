@@ -23,10 +23,10 @@
       "sizes": "64x64"
     }
   ],
-  "start_url": "/",
+  "start_url": "/dashboard",
   "background_color": "#3367D6",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/dashboard",
   "description": "A simply readable Student News app.",
   "theme_color": "#3367D6"
 }
