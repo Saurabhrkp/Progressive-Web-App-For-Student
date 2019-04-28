@@ -1,15 +1,15 @@
-<% include ../navbar %>
+<%- include('../navbar') %>
 <title>Photo</title>
 
 <!-- <div class="m-4 shadow center" style="width: auto;"> -->
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-sm-12 col-md-7 m-auto">
       <br />
       <div class="card shadow " style="width: auto;">
         <a href="../<%= photo.path %>" role="button"
           ><img
-            class="img-fluid img card-img-top"
+            class="img-fluid img card-img-top img-thumbnail"
             src="../<%= photo.path %>"
             alt="<%= photo.caption %>"
         /></a>
@@ -36,4 +36,4 @@
 </div>
 <!-- </div> -->
 
-<% include ../footer %>
+<%- include('../footer') %>

@@ -18,7 +18,7 @@ router.get('/dashboard', ensureAuthenticated, dashboards.dashboard);
 router.get('/dashboard/upload', dashboards.upload);
 
 // Dashboard/Account
-router.get('/dashboard/account', ensureAuthenticated, dashboards.account);
+router.get('/account', ensureAuthenticated, dashboards.account);
 
 // Dashboard/upload/Document
 router.get(

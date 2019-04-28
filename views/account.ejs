@@ -1,51 +1,18 @@
-<% include navbar %>
+<%- include('navbar') %>
 <title>Account</title>
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
-      <h1 class="text-center mb-3">
-        <i class="fa fa-user"></i> Update Information
-      </h1>
-      <% include ./partials/messages %>
-      <form action="/users/register" method="POST">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="username"
-            id="username"
-            name="username"
-            class="form-control"
-            placeholder="Enter username"
-            value="<%= typeof username != 'undefined' ? username : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-control"
-            placeholder="Create Password"
-            value="<%= typeof password != 'undefined' ? password : '' %>"
-          />
-        </div>
-        <div class="form-group">
-          <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            class="form-control"
-            placeholder="Confirm Password"
-            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Save Changes
-        </button>
-      </form>
+      <%- include('./partials/messages') %>
+      <h2 class="text-center mb-3"><i class="fa fa-user"></i> User Account</h2>
+      <p>Username: <%= user.username %></p>
+      <p>User: <%= user.name %></p>
+      <p>Email: <%= user.email %></p>
+      <ul>
+        <% user.photos.forEach(function(photo){ %> <%- include('user/show',
+        {user: user}); %> <% }); %>
+      </ul>
     </div>
   </div>
 </div>
-<% include footer %>
+<%- include('footer') %>

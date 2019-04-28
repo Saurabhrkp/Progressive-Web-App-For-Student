@@ -1,7 +1,7 @@
-<% include navbar %>
+<%- include('navbar') %>
 <title>Home Page</title>
 <div class="container">
-  <% include ./partials/messages %>
+  <%- include('./partials/messages') %>
   <div>
     <br />
     <div class="jumbotron text-center shadow mb-4">
@@ -9,7 +9,7 @@
     </div>
     <div class="row justify-content-center">
       <% for(var i=0; i < photos.length; i++) { %>
-      <div class="col-sm-3">
+      <div class="col-sm-12 col-md-4">
         <div class="card text-center mb-4 shadow">
           <div class="card-body">
             <a href="<%= photos[i].path %>" role="button"
@@ -43,7 +43,7 @@
     </div>
     <div class="row justify-content-center">
       <% for(var i=0; i < pdfs.length; i++) { %>
-      <div class="col-sm-3">
+      <div class="col-sm-12 col-md-4">
         <div class="card text-center mb-4 shadow">
           <div class="card-body">
             <p></p>
@@ -71,7 +71,7 @@
     </div>
     <div class="row justify-content-center">
       <% for(var i=0; i < posts.length; i++) { %>
-      <div class="col-sm-3">
+      <div class="col-sm-12 col-md-6">
         <div class="card text-center mb-4 shadow">
           <div class="card-body">
             <p></p>
@@ -97,6 +97,6 @@
   </div>
 </div>
 
-<% include footer %>
+<%- include('footer') %>
 
-<script src="/loader.js"></script>
+<!-- <script src="/loader.js"></script> -->

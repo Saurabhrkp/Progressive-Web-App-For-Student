@@ -1,11 +1,11 @@
-<% include ../navbar %>
+<%- include('../navbar') %>
 <title>Write A Post</title>
 <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 
 <div style="padding-top: 3%">
   <div class="card col-md-10 m-auto shadow">
     <p></p>
-    <% include ../partials/messages %>
+    <%- include('../partials/messages') %>
     <form class="text-center p-5" method="POST" action="">
       <p class="h4 mb-4">Write A Post</p>
 
@@ -65,4 +65,4 @@
   CKEDITOR.replace('post');
 </script>
 
-<% include ../footer %>
+<%- include('../footer') %>
