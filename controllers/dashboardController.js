@@ -70,10 +70,35 @@ exports.upload = function(req, res) {
 //Account
 //Edit
 exports.account = function(req, res) {
-  res.render('account', {
-    current: 'Account',
-    username: req.user.username
-  });
+  const userID = req.user._id;
+  async.parallel(
+    {
+      user: function(callback) {
+        User.findById(userID)
+          .populate('photos')
+          .populate('pdfs')
+          .populate('texts')
+          .exec(callback);
+      },
+      photos: function(callback) {
+        Photos.find({ _user: userID }).exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.user == null) {
+        // No results.
+        res.redirect('dashboard');
+      }
+      // Successful, so render.
+      res.render('account', {
+        current: 'account',
+        user: req.user
+      });
+    }
+  );
 };
 
 //Document
