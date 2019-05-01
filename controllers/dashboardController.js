@@ -73,29 +73,33 @@ exports.account = function(req, res) {
   const userID = req.user._id;
   async.parallel(
     {
-      user: function(callback) {
-        User.findById(userID)
+      list: function(callback) {
+        User.findById(userID, 'photos pdfs texts')
           .populate('photos')
           .populate('pdfs')
           .populate('texts')
           .exec(callback);
-      },
-      photos: function(callback) {
-        Photos.find({ _user: userID }).exec(callback);
       }
+      // photos: function(callback) {
+      //   Photos.find({ _user: userID }).count().exec(callback);
+      // }
     },
     function(err, results) {
       if (err) {
         return next(err);
       }
-      if (results.user == null) {
+      if (results.list == null) {
         // No results.
         res.redirect('dashboard');
       }
       // Successful, so render.
       res.render('account', {
         current: 'account',
-        user: req.user
+        user: req.user,
+        list: results.list
+        // photo: req.user.photos
+        // pdf: req.user.pdfs,
+        // text: req.user.texts
       });
     }
   );
