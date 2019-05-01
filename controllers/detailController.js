@@ -213,3 +213,163 @@ exports.notice = function(req, res, next) {
     }
   );
 };
+
+exports.photo_delete = function(req, res, next) {
+  async.parallel(
+    {
+      photo: function(callback) {
+        Photo.findById(req.params.id)
+          .populate('_user')
+          .populate('_type')
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.photo == null) {
+        // No results.
+        res.redirect('/account');
+      }
+      // Successful, so render.
+      res.render('./details/delete', {
+        current: 'delete',
+        item: results.photo,
+        user: results.user
+      });
+    }
+  );
+};
+
+exports.photo_delete_post = function(req, res, next) {
+  const ID = req.params.id;
+  const UserID = req.user.id;
+  async.parallel({}, function(err, results) {
+    if (err) {
+      return next(err);
+    } else {
+      User.findOneAndUpdate(UserID, { $pull: { photos: ID } }, function(err) {
+        if (err) {
+          return res.status(500).json({ error: 'error in deleting address' });
+        }
+      });
+      Photo.findOneAndDelete(
+        req.body.id,
+        function deletephoto(err) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect('/account');
+        },
+        console.log(`Deleted from photos`)
+      );
+    }
+  });
+};
+
+exports.pdf_delete = function(req, res, next) {
+  async.parallel(
+    {
+      pdf: function(callback) {
+        Pdf.findById(req.params.id)
+          .populate('_user')
+          .populate('_type')
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.pdf == null) {
+        // No results.
+        res.redirect('/account');
+      }
+      res.render('./details/delete', {
+        current: 'delete',
+        item: results.pdf,
+        user: results.user
+      });
+    }
+  );
+};
+
+exports.pdf_delete_post = function(req, res, next) {
+  const ID = req.params.id;
+  const UserID = req.user.id;
+  async.parallel({}, function(err, results) {
+    if (err) {
+      return next(err);
+    } else {
+      User.findOneAndUpdate(UserID, { $pull: { pdfs: ID } }, function(err) {
+        if (err) {
+          return res.status(500).json({ error: 'error in deleting address' });
+        }
+      });
+      Pdf.findOneAndDelete(
+        req.body.id,
+        function deletepdf(err) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect('/account');
+        },
+        console.log(`Deleted from pdfs`)
+      );
+    }
+  });
+};
+
+exports.text_delete = function(req, res, next) {
+  async.parallel(
+    {
+      text: function(callback) {
+        Text.findById(req.params.id)
+          .populate('_user')
+          .populate('_type')
+          .exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results.text == null) {
+        // No results.
+        res.redirect('/account');
+      }
+      res.render('./details/delete', {
+        current: 'delete',
+        item: results.text,
+        user: results.user
+      });
+    }
+  );
+};
+
+exports.text_delete_post = function(req, res, next) {
+  const ID = req.params.id;
+  const UserID = req.user.id;
+  async.parallel({}, function(err, results) {
+    if (err) {
+      return next(err);
+    } else {
+      User.findOneAndUpdate(UserID, { $pull: { texts: ID } }, function(err) {
+        if (err) {
+          return res.status(500).json({ error: 'error in deleting address' });
+        }
+      });
+      Text.findOneAndDelete(
+        req.body.id,
+        function deletepdf(err) {
+          if (err) {
+            return next(err);
+          }
+          res.redirect('/account');
+        },
+        console.log(`Deleted from pdfs`)
+      );
+    }
+  });
+};

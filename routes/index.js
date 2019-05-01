@@ -125,4 +125,16 @@ router.get('/notice', details.notice);
 
 // TODO: Add new router for user to delete post
 
+router.get('/photo/delete/:id', details.photo_delete);
+
+router.post('/photo/delete/:id', details.photo_delete_post);
+
+router.get('/pdf/delete/:id', details.pdf_delete);
+
+router.post('/pdf/delete/:id', details.pdf_delete_post);
+
+router.get('/text/delete/:id', details.text_delete);
+
+router.post('/text/delete/:id', details.text_delete_post);
+
 module.exports = router;

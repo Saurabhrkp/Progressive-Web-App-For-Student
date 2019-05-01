@@ -1,0 +1,38 @@
+<title>Documents</title>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-5 m-auto">
+      <div class="card card-body shadow">
+        <h1 class="text-center mb-3">Delete</h1>
+        <hr class="my-2" />
+        <h3><%= item.title %></h3>
+        <p><%= item._type.name %></p>
+        <p><%= item.discription %></p>
+        <p><%= moment(item.createdAt).fromNow() %></p>
+        <form method="POST" action="">
+          <div class="form-group">
+            <input
+              class="form-control"
+              id="id"
+              type="hidden"
+              name="id"
+              required="true"
+              value="<%= item._id %>"
+            />
+          </div>
+          <button class="btn btn-danger btn-block" type="submit">
+            Delete
+          </button>
+          <button class="btn btn-primary btn-block" onclick="goBack()">
+            Not now
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
