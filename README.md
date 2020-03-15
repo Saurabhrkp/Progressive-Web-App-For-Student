@@ -1,4 +1,4 @@
-# StudentPWA
+# Progressive Web App for Student
 
 ## PWA for Student to Upload study files of College
 
