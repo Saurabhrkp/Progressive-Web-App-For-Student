@@ -25,9 +25,10 @@
         class="form-control mb-4"
         placeholder="Title"
         value="<%= typeof title != 'undefined' ? title : '' %>"
+        required
       />
 
-      <input type="file" class="custom-file mb-4 " name="pdf" />
+      <input type="file" class="custom-file mb-4" name="pdf" required />
 
       <!-- Discription -->
       <div class="form-group">
@@ -38,6 +39,7 @@
           name="discription"
           placeholder="Discription"
           value="<%= typeof discription != 'undefined' ? discription : '' %>"
+          required
         ></textarea>
       </div>
 
@@ -48,12 +50,11 @@
         class="form-control mb-4"
         placeholder="Caption"
         value="<%= typeof caption != 'undefined' ? caption : '' %>"
+        required
       />
 
       <!-- Upload button -->
-      <button class="btn btn-info btn-block" type="submit">
-        Upload
-      </button>
+      <button class="btn btn-info btn-block" type="submit">Upload</button>
     </form>
     <!-- Default form subscription -->
   </div>

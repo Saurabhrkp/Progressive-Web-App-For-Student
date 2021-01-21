@@ -1,107 +1,109 @@
 <%- include('navbar') %>
 <title>Account</title>
-<div class="row mt-5">
-  <div class="col-md-11 m-auto">
-    <div class="card card-body">
-      <%- include('./partials/messages') %>
-      <h2 class="text-center mb-3">🧑🏻 Account: <%= user.username %></h2>
-    </div>
-  </div>
-</div>
-<div class="row m-5">
-  <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-bordered">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" colspan="3">Photos</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i=0; i < list.photos.length; i++) { %>
-            <tr>
-              <th scope="row"><%= i %></th>
-
-              <td colspan="2"><%= list.photos[i].title %></td>
-              <td>
-                <a
-                  name=""
-                  id=""
-                  href="http://localhost:1000/photo/delete/<%= list.photos[i]._id %>"
-                >
-                  🗑</a
-                >
-              </td>
-            </tr>
-            <% } %>
-          </tbody>
-        </table>
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-md-11 m-auto">
+      <div class="card card-body">
+        <%- include('./partials/messages') %>
+        <h2 class="text-center mb-3">🧑🏻 Account: <%= user.username %></h2>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-bordered">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" colspan="3">Pdfs</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i=0; i < list.pdfs.length; i++) { %>
-            <tr>
-              <th scope="row"><%= i %></th>
+  <div class="row m-5">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" colspan="3">Photos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0; i < list.photos.length; i++) { %>
+              <tr>
+                <th scope="row"><%= i %></th>
 
-              <td colspan="2"><%= list.pdfs[i].title %></td>
-              <td>
-                <a
-                  name=""
-                  id=""
-                  href="http://localhost:1000/pdf/delete/<%= list.pdfs[i]._id %>"
-                >
-                  🗑</a
-                >
-              </td>
-            </tr>
-            <% } %>
-          </tbody>
-        </table>
+                <td colspan="2"><%= list.photos[i].title %></td>
+                <td>
+                  <a
+                    name=""
+                    id=""
+                    href="http://localhost:1000/photo/delete/<%= list.photos[i]._id %>"
+                  >
+                    🗑</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-bordered">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" colspan="3">Texts</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i=0; i < list.texts.length; i++) { %>
-            <tr>
-              <th scope="row"><%= i %></th>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" colspan="3">Pdfs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0; i < list.pdfs.length; i++) { %>
+              <tr>
+                <th scope="row"><%= i %></th>
 
-              <td colspan="2"><%= list.texts[i].title %></td>
-              <td>
-                <a
-                  name=""
-                  id=""
-                  href="http://localhost:1000/text/delete/<%= list.texts[i]._id %>"
-                >
-                  🗑</a
-                >
-              </td>
-            </tr>
-            <% } %>
-          </tbody>
-        </table>
+                <td colspan="2"><%= list.pdfs[i].title %></td>
+                <td>
+                  <a
+                    name=""
+                    id=""
+                    href="http://localhost:1000/pdf/delete/<%= list.pdfs[i]._id %>"
+                  >
+                    🗑</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" colspan="3">Texts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0; i < list.texts.length; i++) { %>
+              <tr>
+                <th scope="row"><%= i %></th>
+
+                <td colspan="2"><%= list.texts[i].title %></td>
+                <td>
+                  <a
+                    name=""
+                    id=""
+                    href="http://localhost:1000/text/delete/<%= list.texts[i]._id %>"
+                  >
+                    🗑</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

@@ -22,6 +22,7 @@
         class="form-control mb-4"
         placeholder="Title"
         value="<%= typeof title != 'undefined' ? title : '' %>"
+        required
       />
 
       <!-- Post -->
@@ -53,9 +54,7 @@
       />
 
       <!-- Sumit button -->
-      <button class="btn btn-info btn-block" type="submit">
-        Sumit
-      </button>
+      <button class="btn btn-info btn-block" type="submit">Sumit</button>
     </form>
     <!-- Default form subscription -->
   </div>
