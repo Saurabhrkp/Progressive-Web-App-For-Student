@@ -7,16 +7,15 @@ var Type = require('../models/type');
 let User = require('../models/user');
 
 //Using Multer
-var uploadPhoto = require('../uploads/multerPhoto');
-var uploadPdf = require('../uploads/multerPdf');
+var { uploadPhoto, uploadPDF } = require('./helper');
 
 var async = require('async');
 
 // Display Author delete form on GET.
-exports.dashboard = function(req, res, next) {
+exports.dashboard = function (req, res, next) {
   async.parallel(
     {
-      photos: function(callback) {
+      photos: function (callback) {
         Photo.find(
           {},
           ['path', 'caption', 'title', 'discription', 'createdAt'],
@@ -26,24 +25,24 @@ exports.dashboard = function(req, res, next) {
           .populate('_type')
           .exec(callback);
       },
-      pdfs: function(callback) {
+      pdfs: function (callback) {
         Pdf.find({}, ['path', 'caption', 'title', 'discription', 'createdAt'], {
-          sort: { _id: -1 }
+          sort: { _id: -1 },
         })
           .populate('_user')
           .populate('_type')
           .exec(callback);
       },
-      posts: function(callback) {
+      posts: function (callback) {
         Text.find({}, ['title', 'post', 'links', 'tags'], {
-          sort: { _id: -1 }
+          sort: { _id: -1 },
         })
           .populate('_user')
           .populate('_type')
           .exec(callback);
-      }
+      },
     },
-    function(err, results) {
+    function (err, results) {
       if (err) {
         return next(err);
       }
@@ -57,34 +56,34 @@ exports.dashboard = function(req, res, next) {
         photos: results.photos,
         pdfs: results.pdfs,
         posts: results.posts,
-        user: req.user
+        user: req.user,
       });
     }
   );
 };
 
-exports.upload = function(req, res) {
+exports.upload = function (req, res) {
   res.render('upload', { current: 'Upload', user: req.user });
 };
 
 //Account
 //Edit
-exports.account = function(req, res) {
+exports.account = function (req, res) {
   const userID = req.user._id;
   async.parallel(
     {
-      list: function(callback) {
+      list: function (callback) {
         User.findById(userID, 'photos pdfs texts')
           .populate('photos')
           .populate('pdfs')
           .populate('texts')
           .exec(callback);
-      }
+      },
       // photos: function(callback) {
       //   Photos.find({ _user: userID }).count().exec(callback);
       // }
     },
-    function(err, results) {
+    function (err, results) {
       if (err) {
         return next(err);
       }
@@ -96,7 +95,7 @@ exports.account = function(req, res) {
       res.render('account', {
         current: 'account',
         user: req.user,
-        list: results.list
+        list: results.list,
         // photo: req.user.photos
         // pdf: req.user.pdfs,
         // text: req.user.texts
@@ -107,22 +106,22 @@ exports.account = function(req, res) {
 
 //Document
 //All controls
-exports.document = function(req, res) {
+exports.document = function (req, res) {
   res.render('./uploads/document', {
     current: 'Upload',
-    user: req.user
+    user: req.user,
   });
 };
 
-exports.document_photo_get = function(req, res) {
+exports.document_photo_get = function (req, res) {
   res.render('./uploads/photo', {
     current: 'Upload',
-    user: req.user._id
+    user: req.user._id,
   });
 };
 
-exports.document_photo_post = function(req, res) {
-  uploadPhoto(req, res, err => {
+exports.document_photo_post = function (req, res) {
+  uploadPhoto(req, res, (err) => {
     const { title, discription, caption } = req.body;
     const errors = [];
     if (!title || !discription || !caption || req.file == undefined) {
@@ -134,7 +133,7 @@ exports.document_photo_post = function(req, res) {
         title,
         discription,
         caption,
-        current: 'Upload'
+        current: 'Upload',
       });
     } else {
       var fullPath = 'photos/' + req.file.filename;
@@ -145,17 +144,17 @@ exports.document_photo_post = function(req, res) {
         discription,
         caption,
         _user: req.user._id,
-        _type: typeID
+        _type: typeID,
       });
-      photo.save(function(err, photo) {
+      photo.save(function (err, photo) {
         if (err) return res.send(err);
-        User.findById(req.user._id, function(err, user) {
+        User.findById(req.user._id, function (err, user) {
           if (err) return res.send(err);
           user.photos.push(photo._id);
           user.save();
           console.log({ photo, user });
         });
-        Type.findById('5cb2db77ef58e46ad681be94', function(err, type) {
+        Type.findById('5cb2db77ef58e46ad681be94', function (err, type) {
           if (err) return res.send(err);
           type.photos.push(photo._id);
           type.save();
@@ -169,15 +168,15 @@ exports.document_photo_post = function(req, res) {
   });
 };
 
-exports.document_pdf_get = function(req, res) {
+exports.document_pdf_get = function (req, res) {
   res.render('./uploads/pdf', {
     current: 'Upload',
-    user: req.user
+    user: req.user,
   });
 };
 
-exports.document_pdf_post = function(req, res) {
-  uploadPdf(req, res, err => {
+exports.document_pdf_post = function (req, res) {
+  uploadPDF(req, res, (err) => {
     const { title, discription, caption } = req.body;
     const errors = [];
     if (!title || !discription || !caption || req.file == undefined) {
@@ -189,7 +188,7 @@ exports.document_pdf_post = function(req, res) {
         title,
         discription,
         caption,
-        current: 'Upload'
+        current: 'Upload',
       });
     } else {
       var fullPath = 'pdfs/' + req.file.filename;
@@ -200,17 +199,17 @@ exports.document_pdf_post = function(req, res) {
         discription,
         caption,
         _user: req.user._id,
-        _type: typeID
+        _type: typeID,
       });
-      pdf.save(function(err, pdf) {
+      pdf.save(function (err, pdf) {
         if (err) return res.send(err);
-        User.findById(req.user._id, function(err, user) {
+        User.findById(req.user._id, function (err, user) {
           if (err) return res.send(err);
           user.pdfs.push(pdf._id);
           user.save();
           console.log({ pdf, user });
         });
-        Type.findById('5cb2db77ef58e46ad681be94', function(err, type) {
+        Type.findById('5cb2db77ef58e46ad681be94', function (err, type) {
           if (err) return res.send(err);
           type.pdfs.push(pdf._id);
           type.save();
@@ -224,14 +223,14 @@ exports.document_pdf_post = function(req, res) {
   });
 };
 
-exports.document_post_get = function(req, res) {
+exports.document_post_get = function (req, res) {
   res.render('./uploads/post', {
     current: 'Upload',
-    user: req.user
+    user: req.user,
   });
 };
 
-exports.document_post_post = function(req, res) {
+exports.document_post_post = function (req, res) {
   const { title, post, links, tags } = req.body;
   var typeID = '5cb2db77ef58e46ad681be94'; //Document
   const errors = [];
@@ -245,7 +244,7 @@ exports.document_post_post = function(req, res) {
       post,
       links,
       tags,
-      current: 'Upload'
+      current: 'Upload',
     });
   } else {
     const text = new Text({
@@ -254,18 +253,18 @@ exports.document_post_post = function(req, res) {
       links,
       tags,
       _user: req.user._id,
-      _type: typeID
+      _type: typeID,
     });
     console.log(text);
-    text.save(function(err, text) {
+    text.save(function (err, text) {
       if (err) return res.send(err);
-      User.findById(req.user._id, function(err, user) {
+      User.findById(req.user._id, function (err, user) {
         if (err) return res.send(err);
         user.texts.push(text._id);
         user.save();
         console.log({ text, user });
       });
-      Type.findById('5cb2db77ef58e46ad681be94', function(err, type) {
+      Type.findById('5cb2db77ef58e46ad681be94', function (err, type) {
         if (err) return res.send(err);
         type.texts.push(text._id);
         type.save();
@@ -281,22 +280,22 @@ exports.document_post_post = function(req, res) {
 //Notice
 //All controls  ObjectId("5cb2db55ef58e46ad681be7e")
 
-exports.notice = function(req, res) {
+exports.notice = function (req, res) {
   res.render('./uploads/notice', {
     current: 'Upload',
-    user: req.user
+    user: req.user,
   });
 };
 
-exports.notice_photo_get = function(req, res) {
+exports.notice_photo_get = function (req, res) {
   res.render('./uploads/photo', {
     current: 'Upload',
-    user: req.user._id
+    user: req.user._id,
   });
 };
 
-exports.notice_photo_post = function(req, res) {
-  uploadPhoto(req, res, err => {
+exports.notice_photo_post = function (req, res) {
+  uploadPhoto(req, res, (err) => {
     var fullPath = 'photos/' + req.file.filename;
     const { title, discription, caption } = req.body;
     var typeID = '5cb2db55ef58e46ad681be7e'; //Document
@@ -310,7 +309,7 @@ exports.notice_photo_post = function(req, res) {
         title,
         discription,
         caption,
-        current: 'Upload'
+        current: 'Upload',
       });
     } else {
       const photo = new Photo({
@@ -319,18 +318,18 @@ exports.notice_photo_post = function(req, res) {
         discription,
         caption,
         _user: req.user._id,
-        _type: typeID
+        _type: typeID,
       });
       console.log(photo);
-      photo.save(function(err, photo) {
+      photo.save(function (err, photo) {
         if (err) return res.send(err);
-        User.findById(req.user._id, function(err, user) {
+        User.findById(req.user._id, function (err, user) {
           if (err) return res.send(err);
           user.photos.push(photo._id);
           user.save();
           console.log({ photo, user });
         });
-        Type.findById('5cb2db55ef58e46ad681be7e', function(err, type) {
+        Type.findById('5cb2db55ef58e46ad681be7e', function (err, type) {
           if (err) return res.send(err);
           type.photos.push(photo._id);
           type.save();
@@ -344,15 +343,15 @@ exports.notice_photo_post = function(req, res) {
   });
 };
 
-exports.notice_pdf_get = function(req, res) {
+exports.notice_pdf_get = function (req, res) {
   res.render('./uploads/pdf', {
     current: 'Upload',
-    user: req.user
+    user: req.user,
   });
 };
 
-exports.notice_pdf_post = function(req, res) {
-  uploadPdf(req, res, err => {
+exports.notice_pdf_post = function (req, res) {
+  uploadPDF(req, res, (err) => {
     var fullPath = 'pdfs/' + req.file.filename;
     const { title, discription, caption } = req.body;
     var typeID = '5cb2db55ef58e46ad681be7e'; //Document
@@ -366,7 +365,7 @@ exports.notice_pdf_post = function(req, res) {
         title,
         discription,
         caption,
-        current: 'Upload'
+        current: 'Upload',
       });
     } else {
       const pdf = new Pdf({
@@ -375,18 +374,18 @@ exports.notice_pdf_post = function(req, res) {
         discription,
         caption,
         _user: req.user._id,
-        _type: typeID
+        _type: typeID,
       });
       console.log(pdf);
-      pdf.save(function(err, pdf) {
+      pdf.save(function (err, pdf) {
         if (err) return res.send(err);
-        User.findById(req.user._id, function(err, user) {
+        User.findById(req.user._id, function (err, user) {
           if (err) return res.send(err);
           user.pdfs.push(pdf._id);
           user.save();
           console.log({ pdf, user });
         });
-        Type.findById('5cb2db55ef58e46ad681be7e', function(err, type) {
+        Type.findById('5cb2db55ef58e46ad681be7e', function (err, type) {
           if (err) return res.send(err);
           type.pdfs.push(pdf._id);
           type.save();
@@ -400,14 +399,14 @@ exports.notice_pdf_post = function(req, res) {
   });
 };
 
-exports.notice_post_get = function(req, res) {
+exports.notice_post_get = function (req, res) {
   res.render('./uploads/post', {
     current: 'Upload',
-    user: req.user
+    user: req.user,
   });
 };
 
-exports.notice_post_post = function(req, res) {
+exports.notice_post_post = function (req, res) {
   const { title, post, links, tags } = req.body;
   var typeID = '5cb2db55ef58e46ad681be7e'; //Document
   const errors = [];
@@ -421,7 +420,7 @@ exports.notice_post_post = function(req, res) {
       post,
       links,
       tags,
-      current: 'Upload'
+      current: 'Upload',
     });
   } else {
     const text = new Text({
@@ -430,17 +429,17 @@ exports.notice_post_post = function(req, res) {
       links,
       tags,
       _user: req.user._id,
-      _type: typeID
+      _type: typeID,
     });
-    text.save(function(err, text) {
+    text.save(function (err, text) {
       if (err) return res.send(err);
-      User.findById(req.user._id, function(err, user) {
+      User.findById(req.user._id, function (err, user) {
         if (err) return res.send(err);
         user.texts.push(text._id);
         user.save();
         console.log({ text, user });
       });
-      Type.findById('5cb2db55ef58e46ad681be7e', function(err, type) {
+      Type.findById('5cb2db55ef58e46ad681be7e', function (err, type) {
         if (err) return res.send(err);
         type.texts.push(text._id);
         type.save();
