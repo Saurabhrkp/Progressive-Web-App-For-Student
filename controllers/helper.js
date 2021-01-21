@@ -75,11 +75,7 @@ const sendFiles = async (req, res, next) => {
         .status(200)
         .json({ success: false, message: 'No files available' });
     }
-    if (files[0].contentType.startsWith('image')) {
-      GFS.openDownloadStreamByName(req.params.filename).pipe(res);
-    } else {
-      res.status(404).json({ err: 'Not a image' });
-    }
+    GFS.openDownloadStreamByName(req.params.filename).pipe(res);
   } catch (error) {
     return next(error);
   }
