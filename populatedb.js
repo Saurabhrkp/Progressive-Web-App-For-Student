@@ -26,7 +26,7 @@ var types = [];
 
 function typeCreate(_id, name, cb) {
   var type = new Type({ _id: _id, name: name });
-  type.save(function(err) {
+  type.save(function (err) {
     if (err) {
       cb(err, null);
       return;
@@ -40,12 +40,12 @@ function typeCreate(_id, name, cb) {
 function createTypes(cb) {
   async.series(
     [
-      function(callback) {
+      function (callback) {
         typeCreate('5cb2db77ef58e46ad681be94', 'Document', callback);
       },
-      function(callback) {
+      function (callback) {
         typeCreate('5cb2db55ef58e46ad681be7e', 'Notices', callback);
-      }
+      },
     ],
     // optional callback
     cb
@@ -55,7 +55,7 @@ function createTypes(cb) {
 async.series(
   [createTypes],
   // Optional callback
-  function(err, results) {
+  function (err, results) {
     if (err) {
       console.log('FINAL ERR: ' + err);
     } else {

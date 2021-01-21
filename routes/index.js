@@ -3,11 +3,12 @@ const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
 const dashboards = require('../controllers/dashboardController');
 const details = require('../controllers/detailController');
+const { sendFiles } = require('../controllers/helper');
 
 // Welcome Page
 router.get('/', (req, res) =>
   res.render('welcome', {
-    current: 'welcome'
+    current: 'welcome',
   })
 );
 
@@ -136,5 +137,9 @@ router.post('/pdf/delete/:id', details.pdf_delete_post);
 router.get('/text/delete/:id', details.text_delete);
 
 router.post('/text/delete/:id', details.text_delete_post);
+
+router.get('/pdfs/:filename', sendFiles);
+
+router.get('/photos/:filename', sendFiles);
 
 module.exports = router;
